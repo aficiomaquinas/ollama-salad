@@ -1,26 +1,18 @@
-#!/bin/sh
+#!/bin/bash -ex
 
-# Start the Ollama server in the background to allow model pulling
+# Start the Ollama server in the background
 /bin/ollama serve &
 SERVE_PID=$!
 
-# Wait a brief moment for the server to initialize
+# Wait a brief moment to ensure the server is ready
 sleep 5
 
-# Attempt to pull the model
-if /bin/ollama pull $MODEL_NAME; then
-    echo "Model $MODEL_NAME successfully pulled."
-else
-    echo "Error: Failed to pull model $MODEL_NAME. Exiting."
-    kill $SERVE_PID
-    exit 1
-fi
+# Pull the model, outputting progress directly to the log
+echo "Pulling model $MODEL_NAME..."
+/bin/ollama pull $MODEL_NAME
 
-# If needed, restart the server to apply the pulled model
-# This step depends on whether the server needs to be restarted 
-# after pulling a model to make it available for use
-kill $SERVE_PID
+echo "Model $MODEL_NAME successfully pulled."
+
+# Continue with server operation in the foreground
 wait $SERVE_PID
-
-# Now, start the Ollama server in the foreground
 exec /bin/ollama serve
