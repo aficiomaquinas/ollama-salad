@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define your image name and version
-IMAGE_NAME="ghcr.io/aficiomaquinas/ollama-salad"
+IMAGE_NAME="aficiomaquinas/ollama-salad"
 VERSION="1.0.0"
 
 # Build and push the Docker image with the version tag for specified platforms
