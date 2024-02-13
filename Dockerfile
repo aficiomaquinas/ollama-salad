@@ -9,5 +9,8 @@ COPY entrypoint.sh /entrypoint.sh
 # Make the entrypoint script executable
 RUN chmod +x /entrypoint.sh
 
+# Install tmux
+RUN apt-get install -y tmux
+
 # Set the entrypoint script to be executed when the container starts
 ENTRYPOINT /bin/ollama serve & /entrypoint.sh
