@@ -10,4 +10,4 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # Set the entrypoint script to be executed when the container starts
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT /bin/ollama serve & /entrypoint.sh
